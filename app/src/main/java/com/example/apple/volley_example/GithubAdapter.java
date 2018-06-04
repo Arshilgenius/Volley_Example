@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -40,9 +41,15 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.GithubView
     @Override
     public void onBindViewHolder(@NonNull GithubViewHolder holder, int position) {
 
-        User user = data[position];
+        final User user = data[position];
         holder.txtUser.setText(user.getLogin());
         Glide.with(holder.imgUser.getContext()).load(user.getAvatarUrl()).into(holder.imgUser);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, user.getLogin(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
